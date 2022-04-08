@@ -1,5 +1,12 @@
 import React, { useState } from "react";
-import { Alert, Button, Container, Offcanvas, Row, Table } from "react-bootstrap";
+import {
+	Alert,
+	Button,
+	Container,
+	Offcanvas,
+	Row,
+	Table,
+} from "react-bootstrap";
 import AddAddress from "./AddAddress";
 
 interface AddressesProps {
@@ -9,7 +16,7 @@ interface AddressesProps {
 
 const Addresses: (props: AddressesProps) => JSX.Element = ({
 	addresses,
-	onSelect
+	onSelect,
 }) => {
 	const [show, setShow] = useState<boolean>(false);
 	const [showAddModal, setShowAddModal] = useState<boolean>(false);
@@ -19,7 +26,7 @@ const Addresses: (props: AddressesProps) => JSX.Element = ({
 	const selectAddress = (address: string) => {
 		onSelect(address);
 		handleClose();
-	}
+	};
 
 	return (
 		<>
@@ -34,7 +41,8 @@ const Addresses: (props: AddressesProps) => JSX.Element = ({
 				show={show}
 				style={{ minWidth: 600 }}
 				onHide={handleClose}
-				backdropClassName="bg-light">
+				backdropClassName="bg-light"
+			>
 				<Offcanvas.Header closeButton className="bg-light">
 					<Offcanvas.Title>Addresses</Offcanvas.Title>
 				</Offcanvas.Header>
@@ -45,7 +53,7 @@ const Addresses: (props: AddressesProps) => JSX.Element = ({
 						</Button>
 					</Row>
 					<Container fluid>
-						{addresses.length !== 0 ?
+						{addresses?.length !== 0 ? (
 							<Table striped bordered hover>
 								<thead>
 									<tr>
@@ -54,21 +62,24 @@ const Addresses: (props: AddressesProps) => JSX.Element = ({
 									</tr>
 								</thead>
 								<tbody>
-									{addresses.map((address, i) =>
-									(<tr className="cursor-pointer" onClick={() => selectAddress(address)}>
-										<td>{i + 1}</td>
-										<td>{address}</td>
-									</tr>
+									{addresses?.map((address, i) => (
+										<tr
+											className="cursor-pointer"
+											onClick={() => selectAddress(address)}
+										>
+											<td>{i + 1}</td>
+											<td>{address}</td>
+										</tr>
 									))}
 								</tbody>
 							</Table>
-							:
+						) : (
 							<Row className="justify-content-center p-5">
 								<Alert variant="warning" className="w-auto">
 									Please add some addresses
 								</Alert>
 							</Row>
-						}
+						)}
 					</Container>
 				</Offcanvas.Body>
 			</Offcanvas>
