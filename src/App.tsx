@@ -1,12 +1,12 @@
 import { useState } from "react";
-import { Container, Table, Offcanvas } from "react-bootstrap";
-
+import { Container } from "react-bootstrap";
+import { LedgerTable } from "./components";
 import "./App.scss";
 
 function App() {
 	return (
-		<Container fluid>
-			<Table></Table>
+		<Container className="pt-3">
+			<LedgerTable />
 		</Container>
 	);
 }
