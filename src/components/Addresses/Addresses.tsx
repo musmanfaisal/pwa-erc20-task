@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import {
 	Alert,
 	Button,
@@ -7,24 +7,23 @@ import {
 	Row,
 	Table,
 } from "react-bootstrap";
+import { AppContext } from "../../context";
+import { IContextValues } from "../../types";
 import AddAddress from "./AddAddress";
 
 interface AddressesProps {
-	addresses: string[];
-	onSelect: (address: string) => any;
+
 }
 
-const Addresses: (props: AddressesProps) => JSX.Element = ({
-	addresses,
-	onSelect,
-}) => {
+const Addresses: (props: AddressesProps) => JSX.Element = ({ }) => {
+	const { addresses, setSelectedAddress } = useContext(AppContext) as IContextValues
 	const [show, setShow] = useState<boolean>(false);
 	const [showAddModal, setShowAddModal] = useState<boolean>(false);
 	const handleClose = () => setShow(false);
 	const handleShow = () => setShow(true);
 
 	const selectAddress = (address: string) => {
-		onSelect(address);
+		setSelectedAddress(address);
 		handleClose();
 	};
 
@@ -53,7 +52,7 @@ const Addresses: (props: AddressesProps) => JSX.Element = ({
 						</Button>
 					</Row>
 					<Container fluid>
-						{addresses?.length !== 0 ? (
+						{addresses && addresses?.length !== 0 ? (
 							<Table striped bordered hover>
 								<thead>
 									<tr>
@@ -64,9 +63,9 @@ const Addresses: (props: AddressesProps) => JSX.Element = ({
 								<tbody>
 									{addresses?.map((address, i) => (
 										<tr
+											key={i}
 											className="cursor-pointer"
-											onClick={() => selectAddress(address)}
-										>
+											onClick={() => selectAddress(address)}>
 											<td>{i + 1}</td>
 											<td>{address}</td>
 										</tr>

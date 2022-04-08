@@ -9,7 +9,7 @@ export interface IContextValues {
 	addresses: string[];
 	balances: IBalances[];
 	selectedAddress: string | undefined;
-	setAddresses: Dispatch<SetStateAction<string[]>>;
+	addAddress: (address: string) => any;
 	setBalances: Dispatch<SetStateAction<IBalances[]>>;
 	setSelectedAddress: (selectedAddress: string) => void;
 }

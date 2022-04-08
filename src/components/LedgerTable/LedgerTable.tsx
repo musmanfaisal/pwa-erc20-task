@@ -2,12 +2,10 @@ import React from "react";
 import { Container, Table } from "react-bootstrap";
 import { LedgerTableData } from "./data";
 
-interface LedgerTableProps {
-	address?: string;
-}
+interface LedgerTableProps { }
 
-const LedgerTable: (props: LedgerTableProps) => JSX.Element = ({ address }) => {
-	
+const LedgerTable: (props: LedgerTableProps) => JSX.Element = ({ }) => {
+
 	return (
 		<Container>
 			<Table striped bordered hover>
