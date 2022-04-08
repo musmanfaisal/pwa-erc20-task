@@ -1,61 +1,51 @@
-export const LedgerTableData = [
+import { IBalances } from "../../types";
+
+export const LedgerTableData: IBalances[] = [
 	{
-		address: "0x0000000000000000000000000000000000000000",
 		name: "BTC",
 		balance: "0",
 	},
 	{
-		address: "0x0000000000000000000000000000000000000001",
 		name: "BTC",
 		balance: "0",
 	},
 	{
-		address: "0x0000000000000000000000000000000000000002",
 		name: "BTC",
 		balance: "0",
 	},
 	{
-		address: "0x0000000000000000000000000000000000000003",
 		name: "BTC",
 		balance: "0",
 	},
 	{
-		address: "0x0000000000000000000000000000000000000004",
 		name: "BTC",
 		balance: "0",
 	},
 	{
-		address: "0x0000000000000000000000000000000000000005",
 		name: "BTC",
 		balance: "0",
 	},
 	{
-		address: "0x0000000000000000000000000000000000000006",
 		name: "BTC",
 		balance: "0",
 	},
 	{
-		address: "0x0000000000000000000000000000000000000007",
 		name: "BTC",
 		balance: "0",
 	},
 	{
-		address: "0x0000000000000000000000000000000000000008",
 		name: "BTC",
 		balance: "0",
 	},
 	{
-		address: "0x0000000000000000000000000000000000000009",
 		name: "BTC",
 		balance: "0",
 	},
 	{
-		address: "0x000000000000000000000000000000000000000a",
 		name: "BTC",
 		balance: "0",
 	},
 	{
-		address: "0x000000000000000000000000000000000000000b",
 		name: "BTC",
 		balance: "0",
 	},
