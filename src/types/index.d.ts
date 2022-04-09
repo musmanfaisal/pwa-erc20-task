@@ -15,3 +15,8 @@ export interface IContextValues {
 	theme: "dark" | "light";
 	setTheme: Dispatch<SetStateAction<string>>;
 }
+
+export interface ICoinAddress {
+	name: string;
+	address: string;
+}

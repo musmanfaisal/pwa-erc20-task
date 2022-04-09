@@ -1,6 +1,5 @@
 import { useContext, useEffect, useState } from "react";
-import { Container, Table } from "react-bootstrap";
-import { LedgerTableData } from "./data";
+import { Alert, Container, Row, Table } from "react-bootstrap";
 import { getWalletInformation } from "./methods";
 import { AppContext } from "../../context";
 import { IContextValues } from "../../types";
@@ -17,7 +16,7 @@ const LedgerTable: (props: LedgerTableProps) => JSX.Element = ({ }) => {
 
 	return (
 		<Container>
-			<Table striped bordered hover variant={theme}>
+			{data ? <Table striped bordered hover variant={theme}>
 				<thead>
 					<tr>
 						<th>#</th>
@@ -26,7 +25,7 @@ const LedgerTable: (props: LedgerTableProps) => JSX.Element = ({ }) => {
 					</tr>
 				</thead>
 				<tbody>
-					{LedgerTableData.map((item, index) => (
+					{data.map((item: any, index: number) => (
 						<tr key={index}>
 							<td>{index + 1}</td>
 							<td>{item.name}</td>
@@ -35,6 +34,12 @@ const LedgerTable: (props: LedgerTableProps) => JSX.Element = ({ }) => {
 					))}
 				</tbody>
 			</Table>
+				:
+				<Row className="justify-content-center">
+					<Alert className="w-auto" variant={theme}>
+						Please select some address to show its information
+					</Alert>
+				</Row>}
 		</Container>
 	);
 };
