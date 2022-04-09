@@ -11,12 +11,12 @@ import { AppContext } from "../../context";
 import { IContextValues } from "../../types";
 import AddAddress from "./AddAddress";
 
-interface AddressesProps {
+interface AddressesProps {}
 
-}
-
-const Addresses: (props: AddressesProps) => JSX.Element = ({ }) => {
-	const { addresses, setSelectedAddress } = useContext(AppContext) as IContextValues
+const Addresses: (props: AddressesProps) => JSX.Element = ({}) => {
+	const { addresses, setSelectedAddress, theme } = useContext(
+		AppContext
+	) as IContextValues;
 	const [show, setShow] = useState<boolean>(false);
 	const [showAddModal, setShowAddModal] = useState<boolean>(false);
 	const handleClose = () => setShow(false);
@@ -40,10 +40,16 @@ const Addresses: (props: AddressesProps) => JSX.Element = ({ }) => {
 				show={show}
 				style={{ minWidth: 600 }}
 				onHide={handleClose}
-				backdropClassName="bg-light"
+				backdropClassName={theme === "light" ? "bg-light" : "bg-dark"}
+				className={theme === "light" ? "bg-light" : "bg-dark"}
 			>
-				<Offcanvas.Header closeButton className="bg-light">
-					<Offcanvas.Title>Addresses</Offcanvas.Title>
+				<Offcanvas.Header
+					closeButton
+					className={theme === "light" ? "bg-light" : "bg-dark"}
+				>
+					<Offcanvas.Title className={theme === "light" ? "" : "text-white"}>
+						Addresses
+					</Offcanvas.Title>
 				</Offcanvas.Header>
 				<Offcanvas.Body className="p-4 m-0">
 					<Row className="justify-content-end p-0 m-0 py-4">
@@ -53,7 +59,7 @@ const Addresses: (props: AddressesProps) => JSX.Element = ({ }) => {
 					</Row>
 					<Container fluid>
 						{addresses && addresses?.length !== 0 ? (
-							<Table striped bordered hover>
+							<Table striped bordered hover variant={theme}>
 								<thead>
 									<tr>
 										<th>#</th>
@@ -65,7 +71,8 @@ const Addresses: (props: AddressesProps) => JSX.Element = ({ }) => {
 										<tr
 											key={i}
 											className="cursor-pointer"
-											onClick={() => selectAddress(address)}>
+											onClick={() => selectAddress(address)}
+										>
 											<td>{i + 1}</td>
 											<td>{address}</td>
 										</tr>

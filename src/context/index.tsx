@@ -7,6 +7,9 @@ const WithAppContext = ({ children }: JSX.ElementChildrenAttribute) => {
 	const [addresses, setAddresses] = useState<string[]>([]);
 	const [balances, setBalances] = useState<IBalances[]>([]);
 	const [selectedAddress, setSelectedAddress] = useState<string | undefined>();
+	const [theme, setTheme] = useState<string>(
+		localStorage.getItem("theme") || "light"
+	);
 
 	const loadApp = () => {
 		try {
@@ -25,7 +28,7 @@ const WithAppContext = ({ children }: JSX.ElementChildrenAttribute) => {
 		addresses.push(address);
 		localStorage.setItem("addresses", JSON.stringify(addresses));
 		setAddresses([...addresses]);
-	}
+	};
 
 	return (
 		<AppContext.Provider
@@ -36,6 +39,8 @@ const WithAppContext = ({ children }: JSX.ElementChildrenAttribute) => {
 				addAddress,
 				setBalances,
 				setSelectedAddress,
+				theme,
+				setTheme,
 			}}
 		>
 			{children}
