@@ -12,4 +12,6 @@ export interface IContextValues {
 	addAddress: (address: string) => any;
 	setBalances: Dispatch<SetStateAction<IBalances[]>>;
 	setSelectedAddress: (selectedAddress: string) => void;
+	theme: string;
+	setTheme: Dispatch<SetStateAction<string>>;
 }

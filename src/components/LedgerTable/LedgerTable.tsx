@@ -1,14 +1,17 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Container, Table } from "react-bootstrap";
 import { LedgerTableData } from "./data";
+import { AppContext } from "../../context";
+import { IContextValues } from "../../types";
 
-interface LedgerTableProps { }
+interface LedgerTableProps {}
 
-const LedgerTable: (props: LedgerTableProps) => JSX.Element = ({ }) => {
+const LedgerTable: (props: LedgerTableProps) => JSX.Element = ({}) => {
+	const { theme } = useContext(AppContext) as IContextValues;
 
 	return (
 		<Container>
-			<Table striped bordered hover>
+			<Table striped bordered hover variant={theme}>
 				<thead>
 					<tr>
 						<th>#</th>
