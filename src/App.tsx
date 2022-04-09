@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { Button, Container, Form, Row } from "react-bootstrap";
+import { Button, Col, Container, Form, Row } from "react-bootstrap";
 import { Addresses, LedgerTable } from "./components";
 import { AppContext } from "./context";
 import "./App.scss";
@@ -25,7 +25,15 @@ function App() {
 						label={theme === "dark" ? "Light mode" : "Dark mode"} />
 				</Row>
 				<Addresses />
-				<h6>{selectedAddress}</h6>
+				{selectedAddress &&
+					<Col className="text-center">
+						<p>
+							<strong>Showing balance for address: </strong>
+							<span>
+								{selectedAddress}
+							</span>
+						</p>
+					</Col>}
 				<LedgerTable />
 			</Container>
 		</div>

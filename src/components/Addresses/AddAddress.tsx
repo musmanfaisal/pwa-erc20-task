@@ -28,8 +28,7 @@ const AddAddress: (props: AddAddressProps) => JSX.Element = ({ onHide }) => {
 				})}
 				initialValues={{
 					address: "",
-				}}
-			>
+				}}>
 				{({
 					values,
 					errors,
@@ -38,7 +37,7 @@ const AddAddress: (props: AddAddressProps) => JSX.Element = ({ onHide }) => {
 					handleBlur,
 					handleSubmit,
 				}) => (
-					<>
+					<Form onSubmit={handleSubmit}>
 						<Modal.Header
 							closeButton
 							closeVariant={theme === "dark" ? "white" : undefined}
@@ -51,6 +50,7 @@ const AddAddress: (props: AddAddressProps) => JSX.Element = ({ onHide }) => {
 									Wallet Address
 								</Form.Label>
 								<Form.Control
+									autoFocus
 									value={values.address}
 									name="address"
 									onChange={handleChange}
@@ -66,7 +66,7 @@ const AddAddress: (props: AddAddressProps) => JSX.Element = ({ onHide }) => {
 						<Modal.Footer className={theme === "light" ? "bg-light" : "bg-dark"}>
 							<Row className="justify-content-end w-100">
 								<Button
-									onClick={handleSubmit as any}
+									type="submit"
 									className="w-auto me-2"
 									variant="info">
 									Save
@@ -76,7 +76,7 @@ const AddAddress: (props: AddAddressProps) => JSX.Element = ({ onHide }) => {
 								</Button>
 							</Row>
 						</Modal.Footer>
-					</>
+					</Form>
 				)}
 			</Formik>
 		</Modal>

@@ -14,9 +14,7 @@ import AddAddress from "./AddAddress";
 interface AddressesProps { }
 
 const Addresses: (props: AddressesProps) => JSX.Element = ({ }) => {
-	const { addresses, setSelectedAddress, theme } = useContext(
-		AppContext
-	) as IContextValues;
+	const { addresses, setSelectedAddress, removeAddress, theme } = useContext(AppContext) as IContextValues;
 	const [show, setShow] = useState<boolean>(false);
 	const [showAddModal, setShowAddModal] = useState<boolean>(false);
 	const handleClose = () => setShow(false);
@@ -65,6 +63,7 @@ const Addresses: (props: AddressesProps) => JSX.Element = ({ }) => {
 									<tr>
 										<th>#</th>
 										<th>Address</th>
+										<th>Actions</th>
 									</tr>
 								</thead>
 								<tbody>
@@ -76,6 +75,14 @@ const Addresses: (props: AddressesProps) => JSX.Element = ({ }) => {
 										>
 											<td>{i + 1}</td>
 											<td>{address}</td>
+											<td>
+												<a onClick={(e) => {
+													e.stopPropagation();
+													removeAddress(i);
+												}}>
+													Delete
+												</a>
+											</td>
 										</tr>
 									))}
 								</tbody>

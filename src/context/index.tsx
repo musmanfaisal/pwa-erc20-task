@@ -1,5 +1,5 @@
 import React, { useState, createContext, useEffect } from "react";
-import { IBalances, IContextValues } from "../types";
+import { IBalances, IContextValues, themeType } from "../types";
 
 export const AppContext = createContext<IContextValues | null>(null);
 
@@ -7,9 +7,7 @@ const WithAppContext = ({ children }: JSX.ElementChildrenAttribute) => {
 	const [addresses, setAddresses] = useState<string[]>([]);
 	const [balances, setBalances] = useState<IBalances[]>([]);
 	const [selectedAddress, setSelectedAddress] = useState<string | undefined>();
-	const [theme, setTheme] = useState<string>(
-		localStorage.getItem("theme") || "light"
-	);
+	const [theme, setTheme] = useState<themeType>(localStorage.getItem("theme") as themeType || "light");
 
 	const loadApp = () => {
 		try {
@@ -30,6 +28,12 @@ const WithAppContext = ({ children }: JSX.ElementChildrenAttribute) => {
 		setAddresses([...addresses]);
 	};
 
+	const removeAddress = (index: number) => {
+		addresses.splice(index, 1);
+		localStorage.setItem("addresses", JSON.stringify(addresses));
+		setAddresses([...addresses]);
+	}
+
 	return (
 		<AppContext.Provider
 			value={{
@@ -37,6 +41,7 @@ const WithAppContext = ({ children }: JSX.ElementChildrenAttribute) => {
 				balances,
 				selectedAddress,
 				addAddress,
+				removeAddress,
 				setBalances,
 				setSelectedAddress,
 				theme,

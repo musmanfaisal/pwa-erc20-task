@@ -5,15 +5,17 @@ export interface IBalances {
 	balance: string;
 }
 
+export type themeType = "dark" | "light";
 export interface IContextValues {
 	addresses: string[];
 	balances: IBalances[];
 	selectedAddress: string | undefined;
 	addAddress: (address: string) => any;
+	removeAddress: (index: number) => any;
 	setBalances: Dispatch<SetStateAction<IBalances[]>>;
 	setSelectedAddress: (selectedAddress: string) => void;
-	theme: "dark" | "light";
-	setTheme: Dispatch<SetStateAction<string>>;
+	theme: themeType
+	setTheme: Dispatch<SetStateAction<themeType>>;
 }
 
 export interface ICoinAddress {

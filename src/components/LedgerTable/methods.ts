@@ -1,34 +1,22 @@
 import Web3 from "web3";
-import { coins } from "./data";
+import { coins, minABI } from "./data";
 
-declare type getWalletInformationType = (args: { address: string; setData: any }) => Promise<void>;
+declare type getWalletInformationType = (address: string) => Promise<any>;
 declare global {
     interface Window {
         ethereum?: any;
     }
 }
 
-export const getWalletInformation: getWalletInformationType = async ({ address, setData }) => {
-    const provider = "https://mainnet.infura.io/v3/6246707008c04969805a13694dff7951"
-    const web3 = new Web3(new Web3.providers.HttpProvider(provider));
-    const minABI = [
+const web3 = new Web3(window.ethereum);
+
+export const getWalletInformation: getWalletInformationType = async (address) => {
+    const balances = [
         {
-            "constant": true,
-            "inputs": [{
-                "name": "who",
-                "type": "address"
-            }],
-            "name": "balanceOf",
-            "outputs": [{
-                "name": "",
-                "type": "uint256"
-            }],
-            "payable": false,
-            "stateMutability": "view",
-            "type": "function"
-        },
+            name: "ETH",
+            balance: await web3.eth.getBalance(address)
+        }
     ];
-    const balances = [];
 
     for (let coin of coins) {
         try {
@@ -40,7 +28,7 @@ export const getWalletInformation: getWalletInformationType = async ({ address, 
         }
     }
 
-    console.log(balances);
-    setData(balances);
-
+    return {
+        data: balances
+    };
 }
