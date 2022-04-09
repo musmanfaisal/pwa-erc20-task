@@ -7,8 +7,8 @@ declare global {
         ethereum?: any;
     }
 }
-
-const web3 = new Web3(window.ethereum);
+const provider = "https://mainnet.infura.io/v3/6246707008c04969805a13694dff7951"
+const web3 = new Web3(new Web3.providers.HttpProvider(provider));
 
 export const getWalletInformation: getWalletInformationType = async (address) => {
     const balances = [

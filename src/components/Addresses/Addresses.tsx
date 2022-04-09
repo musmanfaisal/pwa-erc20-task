@@ -79,7 +79,8 @@ const Addresses: (props: AddressesProps) => JSX.Element = ({ }) => {
 												<a onClick={(e) => {
 													e.stopPropagation();
 													removeAddress(i);
-												}}>
+												}}
+												className="text-danger text-decoration-none">
 													Delete
 												</a>
 											</td>
