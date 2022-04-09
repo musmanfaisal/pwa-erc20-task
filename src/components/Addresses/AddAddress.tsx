@@ -16,9 +16,8 @@ const AddAddress: (props: AddAddressProps) => JSX.Element = ({ onHide }) => {
 		<Modal
 			onHide={onHide}
 			show
-			animation={false}
-			// className={theme === "light" ? "bg-light" : "bg-dark"}
-		>
+			backdropClassName={theme}
+			animation={false}>
 			<Formik
 				onSubmit={({ address }) => {
 					addAddress(address);
@@ -42,37 +41,34 @@ const AddAddress: (props: AddAddressProps) => JSX.Element = ({ onHide }) => {
 					<>
 						<Modal.Header
 							closeButton
-							className={theme === "light" ? "bg-light" : "bg-dark text-white"}
-						>
+							closeVariant={theme === "dark" ? "white" : undefined}
+							className={theme === "light" ? "bg-light" : "bg-dark text-white"}>
 							Add a new address
 						</Modal.Header>
 						<Modal.Body className={theme === "light" ? "bg-light" : "bg-dark"}>
 							<Form.Group className="mb-3">
-								<Form.Label>Wallet Address</Form.Label>
+								<Form.Label className={theme === "light" ? "bg-light" : "bg-dark text-white"}>
+									Wallet Address
+								</Form.Label>
 								<Form.Control
 									value={values.address}
 									name="address"
 									onChange={handleChange}
 									onBlur={handleBlur}
 									placeholder="Enter wallet address"
-									className={
-										theme === "light" ? "bg-light" : "bg-dark text-white"
-									}
+									className={theme === "light" ? "bg-light" : "bg-dark text-white"}
 								/>
 								{touched.address && errors.address && (
 									<p className="text-danger ">{errors.address}</p>
 								)}
 							</Form.Group>
 						</Modal.Body>
-						<Modal.Footer
-							className={theme === "light" ? "bg-light" : "bg-dark"}
-						>
+						<Modal.Footer className={theme === "light" ? "bg-light" : "bg-dark"}>
 							<Row className="justify-content-end w-100">
 								<Button
 									onClick={handleSubmit as any}
 									className="w-auto me-2"
-									variant="info"
-								>
+									variant="info">
 									Save
 								</Button>
 								<Button onClick={onHide} className="w-auto" variant="danger">

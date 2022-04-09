@@ -11,9 +11,9 @@ import { AppContext } from "../../context";
 import { IContextValues } from "../../types";
 import AddAddress from "./AddAddress";
 
-interface AddressesProps {}
+interface AddressesProps { }
 
-const Addresses: (props: AddressesProps) => JSX.Element = ({}) => {
+const Addresses: (props: AddressesProps) => JSX.Element = ({ }) => {
 	const { addresses, setSelectedAddress, theme } = useContext(
 		AppContext
 	) as IContextValues;
@@ -45,6 +45,7 @@ const Addresses: (props: AddressesProps) => JSX.Element = ({}) => {
 			>
 				<Offcanvas.Header
 					closeButton
+					closeVariant={theme === "dark" ? "white" : undefined}
 					className={theme === "light" ? "bg-light" : "bg-dark"}
 				>
 					<Offcanvas.Title className={theme === "light" ? "" : "text-white"}>
