@@ -2,10 +2,6 @@ import { ICoinAddress } from "../../types";
 
 export const coins: ICoinAddress[] = [
     {
-        name: "ETHER",
-        address: "0x76F94412eA028E2bF458243431a2C003483924a1"
-    },
-    {
         name: "LINK",
         address: "0x514910771AF9Ca656af840dff83E8264EcF986CA"
     },
