@@ -11,10 +11,12 @@ import { AppContext } from "../../context";
 import { IContextValues } from "../../types";
 import AddAddress from "./AddAddress";
 
-interface AddressesProps { }
+interface AddressesProps {}
 
-const Addresses: (props: AddressesProps) => JSX.Element = ({ }) => {
-	const { addresses, setSelectedAddress, removeAddress, theme } = useContext(AppContext) as IContextValues;
+const Addresses: (props: AddressesProps) => JSX.Element = ({}) => {
+	const { addresses, setSelectedAddress, removeAddress, theme } = useContext(
+		AppContext
+	) as IContextValues;
 	const [show, setShow] = useState<boolean>(false);
 	const [showAddModal, setShowAddModal] = useState<boolean>(false);
 	const handleClose = () => setShow(false);
@@ -40,6 +42,7 @@ const Addresses: (props: AddressesProps) => JSX.Element = ({ }) => {
 				onHide={handleClose}
 				backdropClassName={theme === "light" ? "bg-light" : "bg-dark"}
 				className={theme === "light" ? "bg-light" : "bg-dark"}
+				scroll
 			>
 				<Offcanvas.Header
 					closeButton
@@ -58,7 +61,7 @@ const Addresses: (props: AddressesProps) => JSX.Element = ({ }) => {
 					</Row>
 					<Container fluid>
 						{addresses && addresses?.length !== 0 ? (
-							<Table striped bordered hover variant={theme}>
+							<Table striped bordered hover variant={theme} responsive>
 								<thead>
 									<tr>
 										<th>#</th>
@@ -76,11 +79,13 @@ const Addresses: (props: AddressesProps) => JSX.Element = ({ }) => {
 											<td>{i + 1}</td>
 											<td>{address}</td>
 											<td>
-												<a onClick={(e) => {
-													e.stopPropagation();
-													removeAddress(i);
-												}}
-												className="text-danger text-decoration-none">
+												<a
+													onClick={(e) => {
+														e.stopPropagation();
+														removeAddress(i);
+													}}
+													className="text-danger text-decoration-none"
+												>
 													Delete
 												</a>
 											</td>
