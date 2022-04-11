@@ -6,9 +6,9 @@ import { IContextValues } from "../../types";
 import { useLoader } from "../../services";
 import CenterLoader from "../CenterLoader/CenterLoader";
 
-interface LedgerTableProps { }
+interface LedgerTableProps {}
 
-const LedgerTable: (props: LedgerTableProps) => JSX.Element = ({ }) => {
+const LedgerTable: (props: LedgerTableProps) => JSX.Element = ({}) => {
 	const { theme, selectedAddress } = useContext(AppContext) as IContextValues;
 	const { loading, invokeApi } = useLoader(false);
 	const [data, setData] = useState<any>([]);
@@ -19,15 +19,18 @@ const LedgerTable: (props: LedgerTableProps) => JSX.Element = ({ }) => {
 		if (selectedAddress) {
 			if (timer.current) clearInterval(timer.current);
 			const getBalanceData = (turnLoaderOn?: boolean) => {
-				invokeApi({
-					api: () => {
-						setError(false);
-						turnLoaderOn && setData([]);
-						return getWalletInformation(selectedAddress);
+				invokeApi(
+					{
+						api: () => {
+							setError(false);
+							turnLoaderOn && setData([]);
+							return getWalletInformation(selectedAddress);
+						},
+						callBack: setData,
+						errorCallback: setError,
 					},
-					callBack: setData,
-					errorCallback: setError
-				}, turnLoaderOn)
+					turnLoaderOn
+				);
 			};
 			getBalanceData(true);
 			timer.current = setInterval(() => getBalanceData(false), 10000);
@@ -36,42 +39,47 @@ const LedgerTable: (props: LedgerTableProps) => JSX.Element = ({ }) => {
 
 	return (
 		<Container>
-			{loading ?
+			{loading ? (
 				<CenterLoader />
-				:
-				error ?
-					<Row className="justify-content-center">
-						<Alert className="w-auto" variant={theme === "dark" ? "dark" : "info"}>
-							There was some error getting information for the address. Please make sure you have the right address
-						</Alert>
-					</Row>
-					:
-					data.length !== 0 ?
-						<Table striped bordered hover variant={theme}>
-							<thead>
-								<tr>
-									<th>#</th>
-									<th>Token Name</th>
-									<th>Balance</th>
-								</tr>
-							</thead>
-							<tbody>
-								{data.map((item: any, index: number) => (
-									<tr key={index}>
-										<td>{index + 1}</td>
-										<td>{item.name}</td>
-										<td>{item.balance}</td>
-									</tr>
-								))}
-							</tbody>
-						</Table>
-						:
-						<Row className="justify-content-center">
-							<Alert className="w-auto" variant={theme === "dark" ? "dark" : "info"}>
-								Please select some address to show its information
-							</Alert>
-						</Row>
-			}
+			) : error ? (
+				<Row className="justify-content-center">
+					<Alert
+						className="w-auto"
+						variant={theme === "dark" ? "dark" : "info"}
+					>
+						There was some error getting information for the address. Please
+						make sure you have the right address
+					</Alert>
+				</Row>
+			) : data.length !== 0 ? (
+				<Table striped bordered hover variant={theme} responsive>
+					<thead>
+						<tr>
+							<th>#</th>
+							<th>Token Name</th>
+							<th>Balance</th>
+						</tr>
+					</thead>
+					<tbody>
+						{data.map((item: any, index: number) => (
+							<tr key={index}>
+								<td>{index + 1}</td>
+								<td>{item.name}</td>
+								<td>{item.balance}</td>
+							</tr>
+						))}
+					</tbody>
+				</Table>
+			) : (
+				<Row className="justify-content-center">
+					<Alert
+						className="w-auto"
+						variant={theme === "dark" ? "dark" : "info"}
+					>
+						Please select some address to show its information
+					</Alert>
+				</Row>
+			)}
 		</Container>
 	);
 };
