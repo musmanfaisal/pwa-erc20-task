@@ -11,9 +11,9 @@ import { AppContext } from "../../context";
 import { IContextValues } from "../../types";
 import AddAddress from "./AddAddress";
 
-interface AddressesProps {}
+interface AddressesProps { }
 
-const Addresses: (props: AddressesProps) => JSX.Element = ({}) => {
+const Addresses: (props: AddressesProps) => JSX.Element = ({ }) => {
 	const { addresses, setSelectedAddress, removeAddress, theme } = useContext(
 		AppContext
 	) as IContextValues;
@@ -21,6 +21,11 @@ const Addresses: (props: AddressesProps) => JSX.Element = ({}) => {
 	const [showAddModal, setShowAddModal] = useState<boolean>(false);
 	const handleClose = () => setShow(false);
 	const handleShow = () => setShow(true);
+
+	// const selectAddress = (address: string) => {
+	// 	setSelectedAddress(address);
+	// 	handleClose();
+	// };
 
 	const selectAddress = (address: string) => {
 		setSelectedAddress(address);
